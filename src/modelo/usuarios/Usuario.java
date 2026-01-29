@@ -1,5 +1,12 @@
 package modelo.usuarios;
 
+
+import enums.TipoSuscripcion;
+import modelo.contenido.Contenido;
+import modelo.plataforma.Playlist;
+
+
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -13,13 +20,12 @@ public abstract class Usuario {
     protected ArrayList<Contenido> historial;
     protected Date fechaRegistro;
 
-    public Usuario(String id, String nombre, String password, TipoSuscripcion suscripcion, ArrayList<Playlist> misPlaylists, ArrayList<Contenido> historial, Date fechaRegistro) {
+
+    public Usuario(String id, String nombre, String password, TipoSuscripcion suscripcion, Date fechaRegistro) {
         this.id = id;
         this.nombre = nombre;
         this.password = password;
         this.suscripcion = suscripcion;
-        this.misPlaylists = misPlaylists;
-        this.historial = historial;
         this.fechaRegistro = fechaRegistro;
     }
 
