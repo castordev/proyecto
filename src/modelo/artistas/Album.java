@@ -91,6 +91,28 @@ public class Album {
     }
 
 
-    public Cancion crearCancion ()
+    public Cancion crearCancion (String titulo, int duracion, GeneroMusical genero){
+
+    }
+
+    public void agregarCancion (Cancion cancion){
+
+    }
+
+    public void eliminarCancion (int posicion){
+
+    }
+
+    public int gerDuracionTotal (){
+
+    }
+
+    public int getNumCanciones (){
+
+    }
+
+    public void ordenarPorPopularidad (){
+
+    }
 
 }

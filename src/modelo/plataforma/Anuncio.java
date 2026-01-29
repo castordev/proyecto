@@ -1,0 +1,117 @@
+package modelo.plataforma;
+
+public class Anuncio {
+
+    private String id;
+    private String empresa;
+    private int duracionSegundos;
+    private String URL;
+    private TipoAnuncio tipo;
+    private int impresiones;
+    private double presupuesto;
+    private boolean activo;
+
+
+
+    public Anuncio(String id, String empresa, int duracionSegundos, String URL, TipoAnuncio tipo, int impresiones, double presupuesto, boolean activo) {
+        this.id = id;
+        this.empresa = empresa;
+        this.duracionSegundos = duracionSegundos;
+        this.URL = URL;
+        this.tipo = tipo;
+        this.impresiones = impresiones;
+        this.presupuesto = presupuesto;
+        this.activo = activo;
+    }
+
+    // gets sets
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(String empresa) {
+        this.empresa = empresa;
+    }
+
+    public int getDuracionSegundos() {
+        return duracionSegundos;
+    }
+
+    public void setDuracionSegundos(int duracionSegundos) {
+        this.duracionSegundos = duracionSegundos;
+    }
+
+    public String getURL() {
+        return URL;
+    }
+
+    public void setURL(String URL) {
+        this.URL = URL;
+    }
+
+    public TipoAnuncio getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoAnuncio tipo) {
+        this.tipo = tipo;
+    }
+
+    public int getImpresiones() {
+        return impresiones;
+    }
+
+    public void setImpresiones(int impresiones) {
+        this.impresiones = impresiones;
+    }
+
+    public double getPresupuesto() {
+        return presupuesto;
+    }
+
+    public void setPresupuesto(double presupuesto) {
+        this.presupuesto = presupuesto;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+
+    // metodos
+
+    public void reproducir(){
+
+    }
+
+    public void registrarImpresion(){
+
+    }
+
+    public void calcularCostoPorImpresion(){
+
+    }
+
+    public void desactivar(){
+
+    }
+
+
+
+
+
+}
