@@ -1,7 +1,11 @@
 package modelo.contenido;
 
+import excepciones.contenido.ContenidoNoDisponibleException;
+import excepciones.contenido.DuracionInvalidaException;
+
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 public abstract class Contenido {
 
@@ -15,82 +19,28 @@ public abstract class Contenido {
     protected Date fechaPublicacion;
 
 
-    public Contenido(String id, String titulo, int reproducciones, int likes, int duracionSegundos, ArrayList<String> tags, boolean disponible, Date fechaPublicacion) {
-        this.id = id;
+    public Contenido(String titulo, int duracionSegundos) throws DuracionInvalidaException {
+
+        // metodo para generar un id aleatorio
+        this.id = java.util.UUID.randomUUID().toString();
+
         this.titulo = titulo;
-        this.reproducciones = reproducciones;
-        this.likes = likes;
         this.duracionSegundos = duracionSegundos;
-        this.tags = tags;
-        this.disponible = disponible;
-        this.fechaPublicacion = fechaPublicacion;
+
+        //valores por defecto (pueden ir en los atributos tambien)
+
+        this.reproducciones = 0;
+        this.likes = 0;
+        this.tags = new ArrayList<>();
+        this.disponible = true;
+        this.fechaPublicacion = new Date();
     }
 
-    public String getId() {
-        return id;
-    }
+    // metodo abstracto
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    public abstract void reproducir() throws ContenidoNoDisponibleException;
 
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public int getReproducciones() {
-        return reproducciones;
-    }
-
-    public void setReproducciones(int reproducciones) {
-        this.reproducciones = reproducciones;
-    }
-
-    public int getLikes() {
-        return likes;
-    }
-
-    public void setLikes(int likes) {
-        this.likes = likes;
-    }
-
-    public int getDuracionSegundos() {
-        return duracionSegundos;
-    }
-
-    public void setDuracionSegundos(int duracionSegundos) {
-        this.duracionSegundos = duracionSegundos;
-    }
-
-    public ArrayList<String> getTags() {
-        return tags;
-    }
-
-    public void setTags(ArrayList<String> tags) {
-        this.tags = tags;
-    }
-
-    public boolean isDisponible() {
-        return disponible;
-    }
-
-    public void setDisponible(boolean disponible) {
-        this.disponible = disponible;
-    }
-
-    public Date getFechaPublicacion() {
-        return fechaPublicacion;
-    }
-
-    public void setFechaPublicacion(Date fechaPublicacion) {
-        this.fechaPublicacion = fechaPublicacion;
-    }
-
-    public abstract void reproducir();
+    // metodos concretos
 
     public void aumentarReproducciones(){
 
@@ -101,11 +51,94 @@ public abstract class Contenido {
     }
 
     public boolean esPopular(){
-        return true;
-    }
-
-    public void validarDuracion (){
 
     }
+
+    public void validarDuracion() throws  DuracionInvalidaException{
+
+    }
+
+    public void agregarTag (String tag){
+
+    }
+
+    public boolean tieneTag (String Tag){
+
+    }
+
+    public void marcarNoDisponible(){
+
+    }
+
+    public void marcarDisponible(){
+
+    }
+
+    public String getDuracionFormateada(){
+
+    }
+
+
+    // gets sets
+
+    public String getId(){
+        return id;
+    }
+
+    public String getTitulo(){
+        return titulo;
+    }
+
+    public void setTitulo(String titulo){
+
+    }
+
+    public int getReproducciones(){
+        return reproducciones;
+    }
+
+    public void setReproducciones(int reproducciones){
+
+    }
+
+    public int getLikes(){
+        return likes;
+    }
+
+    public int getDuracionSegundos(){
+        return duracionSegundos;
+    }
+
+    public ArrayList<String> getTags(){
+
+    }
+
+    public boolean isDisponible(){
+
+    }
+
+    public Date getFechaPublicacion(){
+        return fechaPublicacion;
+    }
+
+    public void setFechaPublicacion(Date fechaPublicacion){
+
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj){
+    }
+
+    @Override
+    public int hashCode(){
+
+    }
+
+
 
 }

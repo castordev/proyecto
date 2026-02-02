@@ -292,9 +292,7 @@ public class Plataforma {
 
     }
 
-    public void getNombre(){
 
-    }
 
 
 }

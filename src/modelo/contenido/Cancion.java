@@ -1,5 +1,14 @@
 package modelo.contenido;
 
+import enums.GeneroMusical;
+import excepciones.contenido.ArchivoAudioNoEncontradoException;
+import excepciones.contenido.ContenidoNoDisponibleException;
+import excepciones.contenido.DuracionInvalidaException;
+import excepciones.contenido.LetraNoDisponibleException;
+import excepciones.descarga.LimiteDescargasException;
+import modelo.artistas.Album;
+import modelo.artistas.Artista;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -12,93 +21,41 @@ public abstract class Cancion extends Contenido {
     private String audioURL;
     private boolean explicit;
     private String ISRC;
+    private boolean reproduciendo;
+    private boolean pausado;
+    private boolean descargado;
 
 
-    public Cancion(String id, String titulo, int reproducciones, int likes, int duracionSegundos, ArrayList<String> tags, boolean disponible, Date fechaPublicacion, String letra, Artista artista, Album album, GeneroMusical genero, String audioURL, boolean explicit, String ISRC) {
-        super(id, titulo, reproducciones, likes, duracionSegundos, tags, disponible, fechaPublicacion);
-        this.letra = letra;
+    public Cancion(String titulo, int duracionSegundos, Artista artista, GeneroMusical genero) throws DuracionInvalidaException {
+        super(titulo, duracionSegundos);
         this.artista = artista;
-        this.album = album;
-        this.genero = genero;
-        this.audioURL = audioURL;
-        this.explicit = explicit;
-        this.ISRC = ISRC;
-    }
-
-    public String getLetra() {
-        return letra;
-    }
-
-    public void setLetra(String letra) {
-        this.letra = letra;
-    }
-
-    public Artista getArtista() {
-        return artista;
-    }
-
-    public void setArtista(Artista artista) {
-        this.artista = artista;
-    }
-
-    public Album getAlbum() {
-        return album;
-    }
-
-    public void setAlbum(Album album) {
-        this.album = album;
-    }
-
-    public GeneroMusical getGenero() {
-        return genero;
-    }
-
-    public void setGenero(GeneroMusical genero) {
         this.genero = genero;
     }
 
-    public String getAudioURL() {
-        return audioURL;
-    }
-
-    public void setAudioURL(String audioURL) {
-        this.audioURL = audioURL;
-    }
-
-    public boolean isExplicit() {
-        return explicit;
-    }
-
-    public void setExplicit(boolean explicit) {
+    public Cancion (String titulo, int duracionSegundos, Artista artista, GeneroMusical genero, String letra, boolean explicit) throws DuracionInvalidaException{
+        super(titulo,duracionSegundos);
+        this.artista  = artista;
+        this.genero = genero;
+        this.letra = letra;
         this.explicit = explicit;
     }
 
-    public String getISRC() {
-        return ISRC;
+    // metodos privados
+
+    private String generarISRC(){
+
     }
 
-    public void setISRC(String ISRC) {
-        this.ISRC = ISRC;
-    }
 
+    // Overrides
 
     @Override
-    public void reproducir(){
+    public void reproducir() throws ContenidoNoDisponibleException{
 
     }
 
-    public String obtenerLetra(){
 
-    }
-
-    public boolean esExplicit(){
-        return true;
-    }
-
-    public void cambiarGenero (GeneroMusical genero){
-
-    }
-
+    //Implementacion interfaz Reproducible:
 
     public void play(){
 
@@ -112,11 +69,119 @@ public abstract class Cancion extends Contenido {
 
     }
 
-    public boolean descargar (){
+    public int getDuracion(){
+        return duracionSegundos;
+    }
+
+
+    //Implementacion interfaz Descargable:
+
+    public boolean descargar() throws LimiteDescargasException{
 
     }
 
-    public boolean eliminarDescarga (){
+    public boolean eliminarDescarga(){
+
+    }
+
+    public int espacioRequerido(){
+
+    }
+
+
+
+    //Metodos propios
+
+    public String obtenerLetra() throws LetraNoDisponibleException{
+        return letra;
+    }
+
+    public boolean exExplicit(){
+
+    }
+
+    public void cambiarGenero(GeneroMusical nuevoGenero){
+
+    }
+
+    public void validarAudioURL() throws ArchivoAudioNoEncontradoException {
+
+    }
+
+
+    //gets sets
+
+    public String  getLetra(){
+        return letra;
+    }
+
+    public void setLetra(String letra){
+
+    }
+
+    public Artista getArtista(){
+        return artista;
+    }
+
+    public void setArtista(Artista artista){
+
+    }
+
+    public Album getAlbum(){
+        return album;
+    }
+
+    public void setAlbum(Album album){
+
+    }
+
+    public GeneroMusical getGenero(){
+        return genero;
+    }
+
+    public void setGenero (GeneroMusical genero){
+
+    }
+
+    public String getAudioURL(){
+        return audioURL;
+    }
+
+    public void setAudioURL (String audioURL){
+
+    }
+
+    public boolean isExplicit(){
+
+    }
+
+    public void setExplicit (boolean explicit){
+
+    }
+
+    public String getISRC(){
+        return ISRC;
+    }
+
+    public boolean isReproduciendo(){
+
+    }
+
+    public boolean isPausado(){
+
+    }
+
+    public boolean isDescargado(){
+
+    }
+
+    public void setDescargado(boolean descargado){
+
+    }
+
+
+    @Override
+    public String toString(){
 
     }
 

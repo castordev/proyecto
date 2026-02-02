@@ -1,4 +1,4 @@
-package excepciones.usuario;
+package excepciones.descarga;
 
 public class LimiteDescargasException extends RuntimeException {
     public LimiteDescargasException(String message) {

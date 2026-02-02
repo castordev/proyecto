@@ -8,21 +8,17 @@ public enum AlgoritmoRecomendacion {
 
     private  String descripcion;
 
-    // contructor
 
     AlgoritmoRecomendacion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-
-    //gets sets
-
-
     public String getDescripcion() {
         return descripcion;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

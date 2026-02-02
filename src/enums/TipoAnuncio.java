@@ -6,10 +6,8 @@ public enum TipoAnuncio {
     BANNER (0, 0.02),
     VIDEO (30, 0.10);
 
-    private int duracionSegundos;
-    private double costoPorImpresion;
-
-    //constructor
+    private final int duracionSegundos;
+    private final double costoPorImpresion;
 
 
     TipoAnuncio(int duracionSegundos, double costoPorImpresion) {
@@ -18,22 +16,16 @@ public enum TipoAnuncio {
     }
 
 
-    //gets sets
-
-
     public int getDuracionSegundos() {
         return duracionSegundos;
-    }
-
-    public void setDuracionSegundos(int duracionSegundos) {
-        this.duracionSegundos = duracionSegundos;
     }
 
     public double getCostoPorImpresion() {
         return costoPorImpresion;
     }
 
-    public void setCostoPorImpresion(double costoPorImpresion) {
-        this.costoPorImpresion = costoPorImpresion;
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

@@ -1,4 +1,4 @@
-package excepciones.usuario;
+package excepciones.descarga;
 
 public class ContenidoYaDescargadoException extends RuntimeException {
     public ContenidoYaDescargadoException(String message) {

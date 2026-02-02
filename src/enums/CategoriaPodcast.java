@@ -2,6 +2,38 @@ package enums;
 
 public enum CategoriaPodcast {
 
-    TECNOLOGIA, DEPORTES, COMEDIA, TRUE_CRIME, EDUCACION, NEGOCIOS, SALUD, ENTRETENIMIENTO, HISTORIA, CIENCIA, POLITICA, CULTURA
+    TECNOLOGIA("Tecnología", "Podcasts sobre tecnología e innovación"),
+    DEPORTES("Deportes", "Podcasts deportivos"),
+    COMEDIA("Comedia", "Podcasts de humor y entretenimiento"),
+    TRUE_CRIME("True Crime", "Podcasts de crímenes reales"),
+    EDUCACION("Educación", "Podcasts educativos"),
+    NEGOCIOS("Negocios", "Podcasts de negocios y emprendimiento"),
+    SALUD("Salud", "Podcasts de salud y bienestar"),
+    ENTRETENIMIENTO("Entretenimiento", "Podcasts de entretenimiento general"),
+    HISTORIA("Historia", "Podcasts históricos"),
+    CIENCIA("Ciencia", "Podcasts científicos"),
+    POLITICA("Política", "Podcasts de política y actualidad"),
+    CULTURA("Cultura", "Podcasts culturales");
 
+
+    private final String nombre;
+    private final String descripcion;
+
+    CategoriaPodcast(String nombre, String descripcion) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+
+    public String getNombreCategoriaPodcast(){
+        return nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }
