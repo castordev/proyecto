@@ -105,9 +105,6 @@ public class Podcast extends  Contenido{
     }
 
 
-
-    //gets sets
-
     public Creador getCreador(){
         return creador;
     }

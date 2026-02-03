@@ -4,6 +4,7 @@ import enums.CategoriaPodcast;
 import excepciones.artista.LimiteEpisodiosException;
 import excepciones.contenido.EpisodioNoEncontradoException;
 import modelo.contenido.Podcast;
+import utilidades.EstadisticasCreador;
 
 import java.util.ArrayList;
 import java.util.HashMap;
