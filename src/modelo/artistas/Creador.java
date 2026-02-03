@@ -1,9 +1,16 @@
 package modelo.artistas;
 
+import enums.CategoriaPodcast;
+import excepciones.artista.LimiteEpisodiosException;
+import excepciones.contenido.EpisodioNoEncontradoException;
+import modelo.contenido.Podcast;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Creador {
+
+    private static final int MAX_EPISODIOS = 500;
 
     private String id;
     private String nombreCanal;
@@ -15,23 +22,60 @@ public class Creador {
     private ArrayList<CategoriaPodcast> catergoriasPrincipales;
 
 
-    public Creador(String id, String nombreCanal, String nombre, ArrayList<Podcast> episodios, int suscriptores, String descripcion, HashMap<String, String> redesSociales, ArrayList<CategoriaPodcast> catergoriasPrincipales) {
-        this.id = id;
+    public Creador(String nombreCanal, String nombre) {
         this.nombreCanal = nombreCanal;
         this.nombre = nombre;
-        this.episodios = episodios;
-        this.suscriptores = suscriptores;
+    }
+
+    public Creador(String nombreCanal, String nombre, String descripcion) {
+        this.nombreCanal = nombreCanal;
+        this.nombre = nombre;
         this.descripcion = descripcion;
-        this.redesSociales = redesSociales;
-        this.catergoriasPrincipales = catergoriasPrincipales;
     }
 
-    public String getId() {
+
+    public void publicarPodcast(Podcast episodio) throws LimiteEpisodiosException{
+
+    }
+
+    public EstadisticasCreador obtenerEstadisticas(){
+
+    }
+
+    public void agregarRedSocial(String red, String usuario){
+
+    }
+
+    public double calcularPromedioReproducciones(){
+
+    }
+
+    //eliminar episodio por ID
+    public void eliminarEpisodio(String idEpisodio) throws EpisodioNoEncontradoException{
+
+    }
+
+    public int getTotalReproducciones(){
+
+    }
+
+    public void incrementarSuscriptores(){
+
+    }
+
+
+    //obtener los x episodios mas reproducidos
+    public ArrayList<Podcast> obtenerTopEpisodios(int cantidad){
+
+    }
+
+    public int getUltimaTemporada(){
+
+    }
+
+
+    public String getId(){
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getNombreCanal() {
@@ -54,10 +98,6 @@ public class Creador {
         return episodios;
     }
 
-    public void setEpisodios(ArrayList<Podcast> episodios) {
-        this.episodios = episodios;
-    }
-
     public int getSuscriptores() {
         return suscriptores;
     }
@@ -78,37 +118,27 @@ public class Creador {
         return redesSociales;
     }
 
-    public void setRedesSociales(HashMap<String, String> redesSociales) {
-        this.redesSociales = redesSociales;
-    }
 
     public ArrayList<CategoriaPodcast> getCatergoriasPrincipales() {
         return catergoriasPrincipales;
     }
 
-    public void setCatergoriasPrincipales(ArrayList<CategoriaPodcast> catergoriasPrincipales) {
-        this.catergoriasPrincipales = catergoriasPrincipales;
-    }
-
-
-    public void publicarPodcast ( Podcast episodio){
+    public int getNumEpisodios(){
 
     }
 
-    public EstadisticasCreador obtenerEstadisticas (){
-
+    @Override
+    public String toString() {
+        return super.toString();
     }
 
-    public void agregarRedSocial (String red, String usuario){
-
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 
-    public double calcularPromedioReproducciones(){
-
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
-
-    public void eliminarEpisodio (String idEpisodio){
-
-    }
-
 }

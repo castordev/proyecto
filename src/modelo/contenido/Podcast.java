@@ -5,6 +5,8 @@ import excepciones.contenido.ContenidoNoDisponibleException;
 import excepciones.contenido.DuracionInvalidaException;
 import excepciones.contenido.EpisodioNoEncontradoException;
 import excepciones.contenido.TranscripcionNoDisponibleException;
+import excepciones.descarga.ContenidoYaDescargadoException;
+import excepciones.descarga.LimiteDescargasException;
 import modelo.artistas.Creador;
 
 import java.util.ArrayList;
@@ -65,6 +67,20 @@ public class Podcast extends  Contenido{
         return duracionSegundos;
     }
 
+
+    // implementacion interfaz Descargable:
+
+    public  boolean descargar() throws LimiteDescargasException, ContenidoYaDescargadoException{
+
+    }
+
+    public boolean eliminarDescarga(){
+
+    }
+
+    public int espacioRequerido(){
+
+    }
 
     //metodos propios
 

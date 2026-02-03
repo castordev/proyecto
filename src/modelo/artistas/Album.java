@@ -1,9 +1,18 @@
 package modelo.artistas;
 
+import enums.GeneroMusical;
+import excepciones.artista.AlbumCompletoException;
+import excepciones.contenido.DuracionInvalidaException;
+import excepciones.playlist.CancionNoEncontradaException;
+import modelo.contenido.Cancion;
+
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Album {
+
+public class Album  {
+
+    private static final int MAX_CANCIONES = 20;
 
     private String id;
     private String titulo;
@@ -15,23 +24,73 @@ public class Album {
     private String tipoAlbum;
 
 
-    public Album(String id, String titulo, Artista artista, Date fechaLanzamiento, ArrayList<Cancion> canciones, String portadaURL, String discografica, String tipoAlbum) {
-        this.id = id;
+    public Album(String titulo, Artista artista, Date fechaLanzamiento) {
         this.titulo = titulo;
         this.artista = artista;
         this.fechaLanzamiento = fechaLanzamiento;
-        this.canciones = canciones;
-        this.portadaURL = portadaURL;
+    }
+
+
+    public Album(String titulo, Artista artista, Date fechaLanzamiento, String discografica, String tipoAlbum) {
+        this.titulo = titulo;
+        this.artista = artista;
+        this.fechaLanzamiento = fechaLanzamiento;
         this.discografica = discografica;
         this.tipoAlbum = tipoAlbum;
     }
 
-    public String getId() {
-        return id;
+
+    // crear cancion y agregar al album
+
+    public Cancion crearCancion(String titulo, int duracionSegundos, GeneroMusical genero) throws AlbumCompletoException, DuracionInvalidaException{
+
     }
 
-    public void setId(String id) {
-        this.id = id;
+    //crear cancion y establece letra/explicit
+
+    public Cancion crearCancion(String titulo, int duracionSegundos, GeneroMusical genero, String letra, boolean explicit) throws AlbumCompletoException, DuracionInvalidaException{
+
+    }
+
+
+    //eliminar cancion por posicion (1-based)
+    public void eliminarCancion(int posicion) throws CancionNoEncontradaException{
+
+    }
+
+    //eliminar cancion por nombre
+    public void eliminarCancion(Cancion cancion) throws  CancionNoEncontradaException{
+
+    }
+
+    public int getDuracionTotal(){
+
+    }
+
+    public String getDuracionTotalFormateada(){
+
+    }
+
+    public int getNumCanciones(){
+
+    }
+
+    public void ordenarPorPopularidad(){
+
+    }
+
+    //obtener cancion por posicion (1-based)
+    public Cancion getCancion (int posicion) throws CancionNoEncontradaException{
+
+    }
+
+    public int getTotalReproducciones(){
+
+    }
+
+
+    public String getId(){
+        return id;
     }
 
     public String getTitulo() {
@@ -62,9 +121,6 @@ public class Album {
         return canciones;
     }
 
-    public void setCanciones(ArrayList<Cancion> canciones) {
-        this.canciones = canciones;
-    }
 
     public String getPortadaURL() {
         return portadaURL;
@@ -90,29 +146,25 @@ public class Album {
         this.tipoAlbum = tipoAlbum;
     }
 
-
-    public Cancion crearCancion (String titulo, int duracion, GeneroMusical genero){
-
-    }
-
-    public void agregarCancion (Cancion cancion){
+    public int getMaxCanciones(){
 
     }
 
-    public void eliminarCancion (int posicion){
+
+    @Override
+    public String toString(){
 
     }
 
-    public int gerDuracionTotal (){
+    @Override
+    public boolean equals(Object obj){
 
     }
 
-    public int getNumCanciones (){
+    @Override
+    public int hashCode(){
 
     }
 
-    public void ordenarPorPopularidad (){
-
-    }
 
 }

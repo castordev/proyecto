@@ -1,11 +1,16 @@
 package modelo.artistas;
 
+import excepciones.artista.ArtistaNoVeridicadoException;
+import modelo.contenido.Cancion;
+
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Artista {
 
     private String id;
     private String nombreArtistico;
+    private String nombreReal;
     private String paisOrigen;
     private ArrayList<Cancion> discografia;
     private ArrayList<Album> albumes;
@@ -13,24 +18,57 @@ public class Artista {
     private boolean verificado;
     private String biografia;
 
-    public Artista(String id, String nombreArtistico, String paisOrigen, ArrayList<Cancion> discografia, ArrayList<Album> albumes, int oyentesMensuales, boolean verificado, String biografia) {
-        this.id = id;
+    public Artista(String nombreArtistico, String nombreReal, String paisOrigen) {
         this.nombreArtistico = nombreArtistico;
+        this.nombreReal = nombreReal;
         this.paisOrigen = paisOrigen;
-        this.discografia = discografia;
-        this.albumes = albumes;
-        this.oyentesMensuales = oyentesMensuales;
+    }
+
+    public Artista(String nombreArtistico, String nombreReal, String paisOrigen, boolean verificado, String biografia) {
+        this.nombreArtistico = nombreArtistico;
+        this.nombreReal = nombreReal;
+        this.paisOrigen = paisOrigen;
         this.verificado = verificado;
         this.biografia = biografia;
     }
 
+    public void publicarCancion(Cancion cancion){
 
-    public String getId() {
-        return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public Album crearAlbum(String titulo, Date fecha) throws ArtistaNoVeridicadoException{
+
+    }
+
+    public ArrayList<Cancion> obtenerTopCanciones (int cantidad){
+
+    }
+
+    public double calcularPromedioReproducciones(){
+
+    }
+
+    public boolean esVerificado(){
+
+    }
+
+    public int getTotalReproducciones(){
+
+    }
+
+    public void verificar(){
+
+    }
+
+    public void incrementar0yentes(){
+
+    }
+
+
+    //gets sets
+
+    public String getId(){
+        return id;
     }
 
     public String getNombreArtistico() {
@@ -41,28 +79,20 @@ public class Artista {
         this.nombreArtistico = nombreArtistico;
     }
 
+    public String getNombreReal() {
+        return nombreReal;
+    }
+
+    public void setNombreReal(String nombreReal) {
+        this.nombreReal = nombreReal;
+    }
+
     public String getPaisOrigen() {
         return paisOrigen;
     }
 
     public void setPaisOrigen(String paisOrigen) {
         this.paisOrigen = paisOrigen;
-    }
-
-    public ArrayList<Cancion> getDiscografia() {
-        return discografia;
-    }
-
-    public void setDiscografia(ArrayList<Cancion> discografia) {
-        this.discografia = discografia;
-    }
-
-    public ArrayList<Album> getAlbumes() {
-        return albumes;
-    }
-
-    public void setAlbumes(ArrayList<Album> albumes) {
-        this.albumes = albumes;
     }
 
     public int getOyentesMensuales() {
@@ -72,6 +102,15 @@ public class Artista {
     public void setOyentesMensuales(int oyentesMensuales) {
         this.oyentesMensuales = oyentesMensuales;
     }
+
+    public ArrayList<Album> getAlbumes() {
+        return albumes;
+    }
+
+    public ArrayList<Cancion> getDiscografia() {
+        return discografia;
+    }
+
 
     public boolean isVerificado() {
         return verificado;
@@ -89,25 +128,19 @@ public class Artista {
         this.biografia = biografia;
     }
 
-    public void publicarCancion (Cancion cancion){
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj){
 
     }
 
-    public Album crearAlbum (String titulo, Date fecha){
+    @Override
+    public int hashCode(){
 
     }
-
-    public ArrayList<Cancion> obtenerTopCanciones (int cantidad){
-
-    }
-
-    public double calcularPromedioReproducciones(){
-
-    }
-
-    public boolean esVerificado (){
-
-    }
-
 
 }
