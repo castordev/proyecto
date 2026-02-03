@@ -1,38 +1,66 @@
 package modelo.plataforma;
 
+import enums.TipoAnuncio;
+
 public class Anuncio {
 
     private String id;
     private String empresa;
     private int duracionSegundos;
-    private String URL;
+    private String audioURL;
     private TipoAnuncio tipo;
     private int impresiones;
     private double presupuesto;
     private boolean activo;
 
-
-
-    public Anuncio(String id, String empresa, int duracionSegundos, String URL, TipoAnuncio tipo, int impresiones, double presupuesto, boolean activo) {
-        this.id = id;
+    public Anuncio(String empresa, TipoAnuncio tipo, double presupuesto) {
         this.empresa = empresa;
-        this.duracionSegundos = duracionSegundos;
-        this.URL = URL;
         this.tipo = tipo;
-        this.impresiones = impresiones;
         this.presupuesto = presupuesto;
-        this.activo = activo;
     }
 
-    // gets sets
+    public Anuncio(String empresa, TipoAnuncio tipo, double presupuesto, String audioURL) {
+        this.empresa = empresa;
+        this.tipo = tipo;
+        this.presupuesto = presupuesto;
+        this.audioURL = audioURL;
+    }
 
+    public void reproducir(){
 
-    public String getId() {
+    }
+
+    public void registrarImpresion(){
+
+    }
+
+    public double calcularCostoPorImpresion(){
+
+    }
+
+    public double calcularCostoTotal(){
+
+    }
+
+    public int calcularImpresionesRestantes(){
+
+    }
+
+    public void desactivar(){
+
+    }
+
+    public void activar(){
+
+    }
+
+    // indica si esta acivo y con presupuesto
+    public boolean puedeMostrarse(){
+
+    }
+
+    public String getId(){
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getEmpresa() {
@@ -51,12 +79,12 @@ public class Anuncio {
         this.duracionSegundos = duracionSegundos;
     }
 
-    public String getURL() {
-        return URL;
+    public String getAudioURL() {
+        return audioURL;
     }
 
-    public void setURL(String URL) {
-        this.URL = URL;
+    public void setAudioURL(String audioURL) {
+        this.audioURL = audioURL;
     }
 
     public TipoAnuncio getTipo() {
@@ -71,9 +99,6 @@ public class Anuncio {
         return impresiones;
     }
 
-    public void setImpresiones(int impresiones) {
-        this.impresiones = impresiones;
-    }
 
     public double getPresupuesto() {
         return presupuesto;
@@ -91,27 +116,19 @@ public class Anuncio {
         this.activo = activo;
     }
 
-
-    // metodos
-
-    public void reproducir(){
-
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 
-    public void registrarImpresion(){
-
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 
-    public void calcularCostoPorImpresion(){
-
+    @Override
+    public String toString() {
+        return super.toString();
     }
-
-    public void desactivar(){
-
-    }
-
-
-
-
 
 }

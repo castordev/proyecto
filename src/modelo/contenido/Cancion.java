@@ -40,14 +40,9 @@ public abstract class Cancion extends Contenido {
         this.explicit = explicit;
     }
 
-    // metodos privados
-
     private String generarISRC(){
 
     }
-
-
-    // Overrides
 
     @Override
     public void reproducir() throws ContenidoNoDisponibleException{

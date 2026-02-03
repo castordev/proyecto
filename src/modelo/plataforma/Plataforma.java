@@ -1,9 +1,24 @@
 package modelo.plataforma;
 
+import enums.CategoriaPodcast;
+import enums.GeneroMusical;
+import enums.TipoAnuncio;
+import enums.TipoSuscripcion;
+import excepciones.artista.AlbumYaExisteException;
+import excepciones.artista.LimiteEpisodiosException;
+import excepciones.contenido.DuracionInvalidaException;
+import excepciones.descarga.LimiteDescargasException;
+import excepciones.plataforma.ArtistaNoEncontradoException;
+import excepciones.plataforma.ContenidoNoEncontradoException;
+import excepciones.plataforma.UsuarioYaExisteException;
+import excepciones.usuario.EmailInvalidoException;
+import excepciones.usuario.PasswordDebilException;
 import modelo.artistas.Album;
 import modelo.artistas.Artista;
 import modelo.artistas.Creador;
+import modelo.contenido.Cancion;
 import modelo.contenido.Contenido;
+import modelo.contenido.Podcast;
 import modelo.usuarios.Usuario;
 import modelo.usuarios.UsuarioGratuito;
 import modelo.usuarios.UsuarioPremium;
@@ -16,281 +31,205 @@ import java.util.HashMap;
 public class Plataforma {
 
     private static Plataforma instancia;
-
     private String nombre;
-    private HashMap<String, Usuario> usuarios;
-    private HashMap<String, Usuario> usuariosPorEmail;
+    private HashMap<String,Usuario> usuarios;
+    private HashMap<String,Usuario> usuariosPorEmail;
     private ArrayList<Contenido> catalogo;
     private ArrayList<Playlist> playlistsPublicas;
-    private HashMap<String, Artista> creadores;
+    private HashMap<String,Artista> artistas;
+    private HashMap<String,Creador> creadores;
     private ArrayList<Album> albumes;
     private ArrayList<Anuncio> anuncios;
-    private RecomendadorIA recomendadorIA;
-
-    // constructor
-
-
-    public Plataforma(String nombre, HashMap<String, Usuario> usuarios, HashMap<String, Usuario> usuariosPorEmail, ArrayList<Contenido> catalogo, ArrayList<Playlist> playlistsPublicas, HashMap<String, Artista> creadores, ArrayList<Album> albumes, ArrayList<Anuncio> anuncios, RecomendadorIA recomendadorIA) {
-        this.nombre = nombre;
-        this.usuarios = usuarios;
-        this.usuariosPorEmail = usuariosPorEmail;
-        this.catalogo = catalogo;
-        this.playlistsPublicas = playlistsPublicas;
-        this.creadores = creadores;
-        this.albumes = albumes;
-        this.anuncios = anuncios;
-        this.recomendadorIA = recomendadorIA;
-    }
+    private RecomendadorIA recomendador;
+    private int totalAnunciosReproducidos;
 
 
-    //gets sets
-
-    public static void setInstancia(Plataforma instancia) {
-        Plataforma.instancia = instancia;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
+    // singleton
+    private Plataforma(String nombre) {
         this.nombre = nombre;
     }
 
-    public HashMap<String, Usuario> getUsuarios() {
-        return usuarios;
+    //devuelve/crea instancia unica
+    public static synchronized Plataforma getInstancia (String nombre){
+
     }
 
-    public void setUsuarios(HashMap<String, Usuario> usuarios) {
-        this.usuarios = usuarios;
+    //devuelve instancia con nombre por defecto
+    public static synchronized Plataforma getInstancia(){
+
     }
 
-    public HashMap<String, Usuario> getUsuariosPorEmail() {
-        return usuariosPorEmail;
+    public static synchronized void reiniciarInstancia(){
+
     }
 
-    public void setUsuariosPorEmail(HashMap<String, Usuario> usuariosPorEmail) {
-        this.usuariosPorEmail = usuariosPorEmail;
+    public UsuarioPremium registrarUsuarioPremium(String nombre, String email, String password, TipoSuscripcion tipo) throws UsuarioYaExisteException, EmailInvalidoException, PasswordDebilException{
+
     }
 
-    public ArrayList<Contenido> getCatalogo() {
-        return catalogo;
+    public UsuarioPremium registrarUsuarioPremium(String nombre, String email, String password) throws UsuarioYaExisteException, EmailInvalidoException, PasswordDebilException{
+
     }
 
-    public void setCatalogo(ArrayList<Contenido> catalogo) {
-        this.catalogo = catalogo;
+    public UsuarioGratuito registrarUsuarioGratuito(String nombre, String email, String password) throws UsuarioYaExisteException, EmailInvalidoException, PasswordDebilException{
+
     }
 
-    public ArrayList<Playlist> getPlaylistsPublicas() {
-        return playlistsPublicas;
+    public ArrayList<UsuarioPremium> getUsuariosPremium(){
+
     }
 
-    public void setPlaylistsPublicas(ArrayList<Playlist> playlistsPublicas) {
-        this.playlistsPublicas = playlistsPublicas;
+    public ArrayList<UsuarioGratuito> getUsuariosGratuitos(){
+
     }
 
-    public HashMap<String, Artista> getCreadores() {
+    public ArrayList<Usuario> getTodosLosUsuarios(){
+
+    }
+
+    public Usuario buscarUsuarioPorEmail(String email){
+
+    }
+
+    public Artista registraArtista (String nombreArtistico, String nombreReal, String paisOrigen, boolean verificado){
+
+    }
+
+    public void registrarArtista(Artista artista){
+
+    }
+
+    public ArrayList<Artista> getArtistasVerificados(){
+
+    }
+
+    public ArrayList<Artista> getArtistasNoVerificados(){
+
+    }
+
+    public Artista buscarArtista(String nombre) throws ArtistaNoEncontradoException{
+
+    }
+
+    public Album crearAlbum(Artista artista, String titulo, Date fecha) throws ArtistaNoEncontradoException, AlbumYaExisteException{
+
+    }
+
+    public ArrayList<Album> getAlbumes(){
+
+    }
+
+    // crear cancion independiente
+    public Cancion crearCancion(String titulo, int duracion, Artista artista, GeneroMusical genero) throws DuracionInvalidaException{
+
+    }
+
+    public Cancion crearCancionEnAlbum(String titulo, int duracion, Artista artista, GeneroMusical genero, Album album) throws DuracionInvalidaException, LimiteDescargasException{
+
+    }
+
+    public void agregarContenidoCatalogo(Contenido contenido){
+
+    }
+
+    public ArrayList<Cancion> getCanciones(){
+
+    }
+
+    public Creador registrarCreador(String nombreCanal, String nombrem, String descripcion){
+
+    }
+
+    public void registrarCreador(Creador creador){
+
+    }
+
+    public Podcast crearPodcast(String titulo, int duracion, Creador creador, int numEpisodio, int temporada, CategoriaPodcast categoria) throws DuracionInvalidaException, LimiteEpisodiosException{
+
+    }
+
+    public ArrayList<Podcast> getPodcasts(){
+
+    }
+
+    public ArrayList<Creador> getTodosLosCreadores(){
+
+    }
+
+    public Playlist crearPlaylistPublica (String nombre, Usuario creador){
+
+    }
+
+    public ArrayList<Playlist> getPlaylistsPublicas(){
+
+    }
+
+    public ArrayList<Contenido> buscarContenido(String termino) throws ContenidoNoEncontradoException{
+
+    }
+
+    public ArrayList<Cancion> buscarPorGenero(GeneroMusical genero) throws  ContenidoNoEncontradoException{
+
+    }
+
+    public ArrayList<Podcast> buscarPorCategoria (CategoriaPodcast categoria) throws ContenidoNoEncontradoException{
+
+    }
+
+    public ArrayList<Contenido> obtenerTopContenidos(int cantidad){
+
+    }
+
+    public Anuncio obtenerAnuncioAleatorio(){
+
+    }
+
+    public void incrementarAnunciosReproducidos(){
+
+    }
+
+    public String obtenerEstadisticasGenerales(){
+
+    }
+
+    public String getNombre(){
+
+    }
+
+    public ArrayList<Contenido> getCatalogo(){
+
+    }
+
+    public HashMap<String, Artista> getArtistas() {
+        return artistas;
+    }
+
+    public HashMap<String, Creador> getCreadores() {
         return creadores;
-    }
-
-    public void setCreadores(HashMap<String, Artista> creadores) {
-        this.creadores = creadores;
-    }
-
-    public ArrayList<Album> getAlbumes() {
-        return albumes;
-    }
-
-    public void setAlbumes(ArrayList<Album> albumes) {
-        this.albumes = albumes;
     }
 
     public ArrayList<Anuncio> getAnuncios() {
         return anuncios;
     }
 
-    public void setAnuncios(ArrayList<Anuncio> anuncios) {
-        this.anuncios = anuncios;
+    public RecomendadorIA getRecomendador() {
+        return recomendador;
     }
 
-    public RecomendadorIA getRecomendadorIA() {
-        return recomendadorIA;
-    }
-
-    public void setRecomendadorIA(RecomendadorIA recomendadorIA) {
-        this.recomendadorIA = recomendadorIA;
-    }
-
-
-
-    // metodos del patron singleton
-    public Plataforma getInstancia (){
+    public int getTtotalUsuarios(){
 
     }
 
-    public Plataforma getInstancia (String nombre){
+    public int getTotalContenido(){
 
     }
 
-    public void reiniciarInstancia (){
-
+    public int getTotalAnunciosReproducidos() {
+        return totalAnunciosReproducidos;
     }
 
 
 
-    // metodos de registro de usuarios
-
-    public UsuarioPremium registrarUsuarioPremium (String nombre, String email, String password){
-
-    }
-
-    public UsuarioGratuito registrarUsuarioGratuito ( String nombre, String email, String password){
-
-    }
-
-    public void getUsuariosGratuitos (){
-
-    }
-
-    public void getUsuariosPremium (){
-
-    }
-
-    public void getTodosLosUsuarios (){
-
-    }
-
-
-
-    //metodos de gestion de artistas
-
-    public Artista registrarArtista (String nombre, String nombreReal, String paisOrigen, Boolean verificado){
-
-    }
-
-    public Artista buscarArtista (String nombre){
-
-    }
-
-    public Artista getArtistas(){
-
-    }
-
-    public Artista getArtistasVerificados(){
-
-    }
-
-    public Artista getArtistaNoVerificados(){
-
-    }
-
-
-
-    // metodos de gestion de contenido
-
-    public Album crearAlbum (Artista artista, String titulo, Date fecha){
-
-    }
-
-    public void crearCancion (String titulo, int duracion, Artista artista, GeneroMusical genero){
-
-    }
-
-    public void crearCancionEnAlbum (String titulo, int duracion, Artista artista, Album album, GeneroMusical genero){
-
-    }
-
-    public Creador registrarCreador (String nombreCanal, String nombre, String descripcion){
-
-    }
-
-    public void cearPodcast (String titulo, int duracion, Creador creador, int temporada, int episodio, CategoriaPodcast categoria){
-
-    }
-
-    public void agregarContenidoCatalogo (Contenido contenido){
-
-    }
-
-    public void getCatalogo(){
-
-    }
-
-    public void getCanciones(){
-
-    }
-
-    public void getPodcasts(){
-
-    }
-
-    public void getAlbumes (){
-
-    }
-
-    public void getTodosLosCreadores (){
-
-    }
-
-
-
-    //metodos de busqueda
-
-    public ArrayList<Contenido> buscarContenido (String termino){
-
-    }
-
-    public ArrayList<Contenido> buscarPorGenero (GeneroMusical genero){
-
-    }
-
-    public ArrayList<Contenido> buscarPorCategoria (CategoriaPodcast categoria){
-
-    }
-
-    public ArrayList<Contenido> obtenerTopContenido (int cantidad){
-
-    }
-
-
-
-    //metodos de playlists
-
-    public void crearPlaylistPublica (String nombre, Usuario creador){
-
-    }
-
-    public void getPlaylistsPublicas (){
-
-    }
-
-
-
-    //metodos de anuncios
-
-    public void agregarAnuncio (Anuncio anuncio){
-
-    }
-
-    public void obtenerAnuncioAleatorio(){
-
-    }
-
-    public void getAnuncios(){
-
-    }
-
-
-
-    //metodos de estadisticas y utilidades
-
-    public String obtenerEstadisticasGenerales(){
-
-    }
-
-    public void getRecomendador (){
-
-    }
 
 
 

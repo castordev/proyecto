@@ -1,9 +1,17 @@
 package modelo.plataforma;
 
+import enums.CriterioOrden;
+import excepciones.playlist.PlaylistLlenaException;
+import excepciones.playlist.PlaylistVaciaException;
+import modelo.contenido.Contenido;
+import modelo.usuarios.Usuario;
+
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Playlist {
+
+    public static final int MAX_CONTENIDOS_DEFAULT = 500;
 
     private String id;
     private String nombre;
@@ -16,25 +24,86 @@ public class Playlist {
     private Date fechaCreacion;
     private int maxContenidos;
 
-    public Playlist(String id, String nombre, Usuario creador, ArrayList<Contenido> contenidos, boolean esPublica, int seguidores, String descripcion, String portadaURL, Date fechaCreacion, int maxContenidos) {
-        this.id = id;
+    public Playlist(String nombre, Usuario creador) {
         this.nombre = nombre;
         this.creador = creador;
-        this.contenidos = contenidos;
+    }
+
+    public Playlist(String nombre, Usuario creador, boolean esPublica, String descripcion) {
+        this.nombre = nombre;
+        this.creador = creador;
         this.esPublica = esPublica;
-        this.seguidores = seguidores;
         this.descripcion = descripcion;
-        this.portadaURL = portadaURL;
-        this.fechaCreacion = fechaCreacion;
-        this.maxContenidos = maxContenidos;
     }
 
-    public String getId() {
+    public void agregarContenido(Contenido contenido)throws PlaylistLlenaException{
+
+    }
+
+    //borrar contenido por id
+    public boolean eliminarContenido(String idContenido){
+
+    }
+
+    //borrar contenido por referencia
+    public boolean eliminarContenidoContenido(Contenido contenido){
+
+    }
+
+    public void ordenarPor(CriterioOrden criterio) throws PlaylistVaciaException{
+
+    }
+
+    public int getDuracionTotal(){
+
+    }
+
+    public String getDuracionTotalFormateada(){
+
+    }
+
+    public void shuffle(){
+
+    }
+
+    //buscar contenido por coincidencia en titulo
+    public ArrayList<Contenido> buscarContenido(String termino){
+
+    }
+
+    public void hacerPublica(){
+
+    }
+
+    public void hacerPrivada(){
+
+    }
+
+    public void incrementarSeguidores(){
+
+    }
+
+    //sin bajar de 0
+    public void decrementarSeguidores(){
+
+    }
+
+    public int getNumContenidos(){
+
+    }
+
+    public boolean estaVacia(){
+
+    }
+
+    //devuelve el contenido en indice (0-based) o null
+    public Contenido getContenido(int posicion){
+
+    }
+
+
+    public String getId(){
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getNombre() {
@@ -49,16 +118,8 @@ public class Playlist {
         return creador;
     }
 
-    public void setCreador(Usuario creador) {
-        this.creador = creador;
-    }
-
     public ArrayList<Contenido> getContenidos() {
         return contenidos;
-    }
-
-    public void setContenidos(ArrayList<Contenido> contenidos) {
-        this.contenidos = contenidos;
     }
 
     public boolean isEsPublica() {
@@ -97,56 +158,23 @@ public class Playlist {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(Date fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
-
     public int getMaxContenidos() {
         return maxContenidos;
     }
 
-    public void setMaxContenidos(int maxContenidos) {
-        this.maxContenidos = maxContenidos;
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 
-    public void agregarContenido (Contenido contenido){
-
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 
-    public boolean eliminarContenido (String idContenido){
-
+    @Override
+    public String toString() {
+        return super.toString();
     }
-
-    public void ordenarPor (CriterioOrden criterio){
-
-    }
-
-    public int getDuracionTotal (){
-
-    }
-
-    public void ordenarPor (CriterioOrden criterio){
-
-    }
-
-    public int getDurationTotal (){
-
-    }
-
-    public void shuffle (){
-
-    }
-
-    public ArrayList<Contenido> buscarContenido (String termino){
-
-    }
-
-    public void hacePublica (){
-
-    }
-
-    public void hacerPrivada (){
-
-    }
-
 }
