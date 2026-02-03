@@ -229,9 +229,8 @@ public class Plataforma {
     }
 
 
-
-
-
-
-
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

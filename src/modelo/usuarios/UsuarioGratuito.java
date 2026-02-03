@@ -1,86 +1,97 @@
 package modelo.usuarios;
 
+import excepciones.contenido.ContenidoNoDisponibleException;
+import excepciones.usuario.AnuncioRequeridoExcepcion;
+import excepciones.usuario.EmailInvalidoException;
+import excepciones.usuario.LimiteDiarioAlcanzadoException;
+import excepciones.usuario.PasswordDebilException;
+import modelo.contenido.Contenido;
+import modelo.plataforma.Anuncio;
+
 import java.util.ArrayList;
 import java.util.Date;
 
 public class UsuarioGratuito  extends Usuario{
+
+    private static final int LIMITE_DIARIO = 30;
+    private static final int CANCIONES_ENTRE_ANUNCIOS = 3;
 
     private int anunciosEscuchados;
     private Date ultimoAnuncio;
     private int reproduccionesHoy;
     private int limiteReproducciones;
     private int cancionesSinAnuncio;
+    private Date fechaUltimaReproduccion;
 
-    public UsuarioGratuito(String id, String nombre, String password, TipoSuscripcion suscripcion, ArrayList<Playlist> misPlaylists, ArrayList<Contenido> historial, Date fechaRegistro, int anunciosEscuchados, Date ultimoAnuncio, int reproduccionesHoy, int limiteReproducciones, int cancionesSinAnuncio) {
-        super(id, nombre, password, suscripcion, misPlaylists, historial, fechaRegistro);
-        this.anunciosEscuchados = anunciosEscuchados;
-        this.ultimoAnuncio = ultimoAnuncio;
-        this.reproduccionesHoy = reproduccionesHoy;
-        this.limiteReproducciones = limiteReproducciones;
-        this.cancionesSinAnuncio = cancionesSinAnuncio;
-    }
-
-
-    public int getAnunciosEscuchados() {
-        return anunciosEscuchados;
-    }
-
-    public void setAnunciosEscuchados(int anunciosEscuchados) {
-        this.anunciosEscuchados = anunciosEscuchados;
-    }
-
-    public Date getUltimoAnuncio() {
-        return ultimoAnuncio;
-    }
-
-    public void setUltimoAnuncio(Date ultimoAnuncio) {
-        this.ultimoAnuncio = ultimoAnuncio;
-    }
-
-    public int getReproduccionesHoy() {
-        return reproduccionesHoy;
-    }
-
-    public void setReproduccionesHoy(int reproduccionesHoy) {
-        this.reproduccionesHoy = reproduccionesHoy;
-    }
-
-    public int getLimiteReproducciones() {
-        return limiteReproducciones;
-    }
-
-    public void setLimiteReproducciones(int limiteReproducciones) {
-        this.limiteReproducciones = limiteReproducciones;
-    }
-
-    public int getCancionesSinAnuncio() {
-        return cancionesSinAnuncio;
-    }
-
-    public void setCancionesSinAnuncio(int cancionesSinAnuncio) {
-        this.cancionesSinAnuncio = cancionesSinAnuncio;
-    }
-
-
-    @Override
-    public void reproducir(Contenido contenido){
+    public UsuarioGratuito (String nombre, String email, String password) throws EmailInvalidoException, PasswordDebilException{
+        super(nombre,email,password);
 
     }
 
-
-    public void verAnuncio (){
+    // Aplica limite diario y logica de anuncios
+    public void reproducir (Contenido contenido) throws ContenidoNoDisponibleException, LimiteDiarioAlcanzadoException, AnuncioRequeridoExcepcion{
 
     }
 
+    public void verAnuncio(){
 
-    public boolean puedeReproducir (Contenido contenido){
+    }
 
-        return true;
+    public void verAnuncio(Anuncio anuncio){
+
+    }
+
+    public boolean puedeReproducir(){
+
+    }
+
+    public boolean debeVerAnuncio(){
+
     }
 
     public void reiniciarContadorDiario(){
 
     }
 
+    public int getReproduccionesRestantes(){
 
+    }
+
+    public int getCancionesHastaAnuncio(){
+
+    }
+
+
+    public int getAnunciosEscuchados(){
+
+    }
+
+    public Date getUltimoAnuncio(){
+
+    }
+
+    public int getLimiteReproduccionesHoy(){
+
+    }
+
+    public void setReproduccionesHoy(int ReproduccionesHoy){
+
+    }
+
+    public int getLimiteReproducciones(){
+
+    }
+
+    public int getCancionesSinAnuncio(){
+
+    }
+
+    public void setCancionesSinAnuncio(int cancionesSinAnuncio){
+
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

@@ -1,5 +1,7 @@
 package utilidades;
 
+import enums.AlgoritmoRecomendacion;
+import excepciones.recomendacion.RecomendacionException;
 import modelo.contenido.Contenido;
 import modelo.usuarios.Usuario;
 
@@ -8,36 +10,58 @@ import java.util.HashMap;
 
 public class RecomendadorIA {
 
-    private HashMap<String, ArrayList<Conenido>> matrizPreferencias;
+    private static final double UMBRAL_DEFAULT = 0.6;
+
+    private HashMap<String, ArrayList<Contenido>> matrizPreferencias;
     private HashMap<String, ArrayList<Contenido>> historialCompleto;
     private AlgoritmoRecomendacion algoritmo;
     private double umbralSimilud;
     private boolean modeloEntrenado;
+    private ArrayList<Contenido> catalogoReferencia;
 
+    public RecomendadorIA(){
 
-    public RecomendadorIA(HashMap<String, ArrayList<Conenido>> matrizPreferencias, HashMap<String, ArrayList<Contenido>> historialCompleto, AlgoritmoRecomendacion algoritmo, double umbralSimilud, boolean modeloEntrenado) {
-        this.matrizPreferencias = matrizPreferencias;
-        this.historialCompleto = historialCompleto;
-        this.algoritmo = algoritmo;
-        this.umbralSimilud = umbralSimilud;
-        this.modeloEntrenado = modeloEntrenado;
+    }
+
+    public RecomendadorIA (AlgoritmoRecomendacion algoritmo) {
+
+    }
+
+    @Override
+    public ArrayList<Contenido> recomendar(Usuario usuario) throws RecomendacionException{
+
+    }
+
+    @Override
+    public ArrayList<Contenido> obtenerSimilares (Contenido contenido) throws RecomendacionException{
+
     }
 
 
-    public HashMap<String, ArrayList<Conenido>> getMatrizPreferencias() {
-        return matrizPreferencias;
+    public void entrenarModelo(ArrayList<Usuario> usuarios){
+
     }
 
-    public void setMatrizPreferencias(HashMap<String, ArrayList<Conenido>> matrizPreferencias) {
-        this.matrizPreferencias = matrizPreferencias;
+    public void entrenarModelo(ArrayList<Usuario> usuarios, ArrayList<Contenido> catalogo){
+
     }
 
-    public HashMap<String, ArrayList<Contenido>> getHistorialCompleto() {
-        return historialCompleto;
+    public double calcularSimilitud (Usuario u1, Usuario u2){
+
     }
 
-    public void setHistorialCompleto(HashMap<String, ArrayList<Contenido>> historialCompleto) {
-        this.historialCompleto = historialCompleto;
+    public void actualizarPreferencias(Usuario usuario){
+
+    }
+
+    public HashMap<String, Integer> obtenerGenerosPopulares(){
+
+    }
+
+
+    //calcular similitud de un contenido frente a referencias
+    private double calcularSimilitudContenido(Contenido contenido, ArrayList<String> preferencias){
+
     }
 
     public AlgoritmoRecomendacion getAlgoritmo() {
@@ -56,32 +80,17 @@ public class RecomendadorIA {
         this.umbralSimilud = umbralSimilud;
     }
 
-    public boolean isModeloEntrenado() {
-        return modeloEntrenado;
-    }
-
-    public void setModeloEntrenado(boolean modeloEntrenado) {
-        this.modeloEntrenado = modeloEntrenado;
-    }
-
-    public ArrayList<Contenido> recomendar (Usuario usuario){
+    public boolean isModeloEntrenado(){
 
     }
 
-    public ArrayList<Contenido> obtenerSimilares (Contenido contenido){
+    public HashMap<String, ArrayList<String>> getMatrizPreferencias(){
 
     }
 
-    public void entrenarModelo (ArrayList<Usuario> usuarios, ArrayList<Contenido> catalogo){
+    public void setCatalogoReferencia (ArrayList<Contenido> catalogo){
 
     }
 
-    public double calcularSimilitud (Usuario u1, Usuario u2){
-
-    }
-
-    public void actualizarPreferencias (Usuario usuario){
-
-    }
 
 }

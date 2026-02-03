@@ -2,39 +2,84 @@ package modelo.usuarios;
 
 
 import enums.TipoSuscripcion;
+import excepciones.artista.LimiteEpisodiosException;
+import excepciones.contenido.ContenidoNoDisponibleException;
+import excepciones.usuario.AnuncioRequeridoExcepcion;
+import excepciones.usuario.EmailInvalidoException;
+import excepciones.usuario.PasswordDebilException;
 import modelo.contenido.Contenido;
 import modelo.plataforma.Playlist;
-
-
 
 import java.util.ArrayList;
 import java.util.Date;
 
 public abstract class Usuario {
 
-    protected String id;
-    protected String nombre;
-    protected String password;
-    protected TipoSuscripcion suscripcion;
-    protected ArrayList<Playlist> misPlaylists;
-    protected ArrayList<Contenido> historial;
-    protected Date fechaRegistro;
+    private String id;
+    private String nombre;
+    private String email;
+    private String password;
+    private TipoSuscripcion suscripcion;
+    private ArrayList<Playlist> misPlaylists;
+    private ArrayList<Contenido> historial;
+    private Date fechaRegistro;
+    private ArrayList<Playlist> playlistsSeguidas;
+    private ArrayList<Contenido> contenidosLiked;
 
 
-    public Usuario(String id, String nombre, String password, TipoSuscripcion suscripcion, Date fechaRegistro) {
-        this.id = id;
+    public Usuario(String nombre, String email, String password, TipoSuscripcion suscripcion) throws EmailInvalidoException, AnuncioRequeridoExcepcion {
         this.nombre = nombre;
+        this.email = email;
         this.password = password;
         this.suscripcion = suscripcion;
-        this.fechaRegistro = fechaRegistro;
     }
 
-    public String getId() {
-        return id;
+
+    //reproduce contenido segun tipo de usuario
+    public abstract void reproducir (Contenido contenido) throws  ContenidoNoDisponibleException, LimiteEpisodiosException, AnuncioRequeridoExcepcion;
+
+    public Playlist crearPlaylists( String nombrePlaylist){
+
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void seguirPlaylist(Playlist playlist){
+
+    }
+
+    public void dejarDeSeguirPlaylist( Playlist playlist){
+
+    }
+
+    public void darLike (Contenido contenido){
+
+    }
+
+    public void quitarLike (Contenido contenido){
+
+    }
+
+    public boolean validarEmail() throws EmailInvalidoException{
+
+    }
+
+    public boolean validarPassword() throws PasswordDebilException{
+
+    }
+
+    public void agregarAlHistorial( Contenido contenido){
+
+    }
+
+    public void limpiarHistorial(){
+
+    }
+
+    public boolean esPremium(){
+
+    }
+
+    public String getId(){
+
     }
 
     public String getNombre() {
@@ -45,11 +90,19 @@ public abstract class Usuario {
         this.nombre = nombre;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) throws EmailInvalidoException {
+        this.email = email;
+    }
+
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password) throws PasswordDebilException {
         this.password = password;
     }
 
@@ -61,60 +114,38 @@ public abstract class Usuario {
         this.suscripcion = suscripcion;
     }
 
-    public ArrayList<Playlist> getMisPlaylists() {
-        return misPlaylists;
-    }
-
-    public void setMisPlaylists(ArrayList<Playlist> misPlaylists) {
-        this.misPlaylists = misPlaylists;
-    }
-
-    public ArrayList<Contenido> getHistorial() {
-        return historial;
-    }
-
-    public void setHistorial(ArrayList<Contenido> historial) {
-        this.historial = historial;
-    }
-
-    public Date getFechaRegistro() {
-        return fechaRegistro;
-    }
-
-    public void setFechaRegistro(Date fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }
-
-
-
-    public abstract void reproducir (Contenido contenido);
-
-
-    public void crearPlaylist (String nombre){
+    public ArrayList<Playlist> getMisPlaylists(){
 
     }
 
-    public void seguirPlaylist (Playlist playlist){
+    public ArrayList<Contenido> getHistorial(){
 
     }
 
-    public void darLike (Contenido contenido){
+    public Date getFechaRegistro(){
 
     }
 
-    public boolean validarEmail (){
-
-        return true;
-    }
-
-    public boolean validarPassword(){
-
-        return true;
-    }
-
-    public void agregarAlHistorial (Contenido contenido){
+    public ArrayList<Playlist> getPlaylistsSeguidas(){
 
     }
 
+    public ArrayList<Contenido> getContenidosLiked(){
 
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }
