@@ -9,9 +9,6 @@ import excepciones.descarga.LimiteDescargasException;
 import modelo.artistas.Album;
 import modelo.artistas.Artista;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 public abstract class Cancion extends Contenido {
 
     private String letra;
@@ -40,30 +37,46 @@ public abstract class Cancion extends Contenido {
         this.explicit = explicit;
     }
 
-    private String generarISRC(){
 
+    // ISRC no real
+    private String generarISRC(){
+        return "ISRC-" + java.util.UUID.randomUUID().toString();
     }
+
 
     @Override
     public void reproducir() throws ContenidoNoDisponibleException{
-
+        if(!disponible){
+            throw new ContenidoNoDisponibleException("Canción no disponible");
+        }
+        play();
+        aumentarReproducciones();
     }
 
 
     //Implementacion interfaz Reproducible:
 
+    @Override
     public void play(){
-
+        reproduciendo = true;
+        pausado = false;
     }
 
+    @Override
     public void pause(){
-
+        if(reproduciendo){
+            pausado = true;
+            reproduciendo = false;
+        }
     }
 
+    @Override
     public void stop(){
-
+        reproduciendo = false;
+        pausado = false;
     }
 
+    @Override
     public int getDuracion(){
         return duracionSegundos;
     }
@@ -71,16 +84,28 @@ public abstract class Cancion extends Contenido {
 
     //Implementacion interfaz Descargable:
 
+    @Override
     public boolean descargar() throws LimiteDescargasException{
-
+        if(descargado){
+            return false;
+        }
+        descargado = true;
+        return true;
     }
 
+    @Override
     public boolean eliminarDescarga(){
-
+        if(!descargado){
+            return false;
+        }
+        descargado = false;
+        return true;
     }
 
+    @Override
     public int espacioRequerido(){
-
+        // Aproximación: 1MB por minuto de audio
+        return Math.max(1, duracionSegundos / 60);
     }
 
 
@@ -88,11 +113,14 @@ public abstract class Cancion extends Contenido {
     //Metodos propios
 
     public String obtenerLetra() throws LetraNoDisponibleException{
+        if(letra == null || letra.isEmpty()){
+            throw new LetraNoDisponibleException("Letra no disponible");
+        }
         return letra;
     }
 
     public boolean exExplicit(){
-
+        return explicit;
     }
 
     public void cambiarGenero(GeneroMusical nuevoGenero){

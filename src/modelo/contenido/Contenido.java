@@ -2,6 +2,7 @@ package modelo.contenido;
 
 import excepciones.contenido.ContenidoNoDisponibleException;
 import excepciones.contenido.DuracionInvalidaException;
+import excepciones.descarga.LimiteDescargasException;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -51,7 +52,7 @@ public abstract class Contenido {
 
     public void validarDuracion() throws  DuracionInvalidaException{
         if (duracionSegundos <= 0){
-            throw new   DuracionInvalidaException("La duración no puede ser menor que 0 segundos")
+            throw new   DuracionInvalidaException("La duración no puede ser menor que 0 segundos");
         }
     }
 
@@ -142,20 +143,44 @@ public abstract class Contenido {
         this.fechaPublicacion = fechaPublicacion;
     }
 
+    public abstract void play();
+
+    public abstract void pause();
+
+    public abstract void stop();
+
+    public abstract int getDuracion();
+
+    public abstract boolean descargar() throws LimiteDescargasException;
+
+    public abstract boolean eliminarDescarga();
+
+    public abstract int espacioRequerido();
+
     @Override
     public String toString() {
         return super.toString();
     }
 
+
+    // si dos objetos Contenido tienen el mismo id, significa que son iguales
     @Override
-    public boolean equals(Object obj){
+    public boolean equals(Object obj) {
+        if (this == obj) return true; // si dos objetos apuntan al mismo sitio en memoria, son iguales
+
+        // si es el otro objeto no existe(null) no puede ser igual
+        // si no son de la misma clase, no son iguales
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Contenido contenido = (Contenido) obj;
+
+        return Objects.equals(id, contenido.id); //devuelve true si el id de este objeto y el id del otro son iguales
     }
 
+
+    // le decimos que queremos que el hash dependa del id y no de la memoria
     @Override
-    public int hashCode(){
-
+    public int hashCode() {
+        return Objects.hash(id);
     }
-
-
 
 }
