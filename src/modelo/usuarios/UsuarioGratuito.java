@@ -99,7 +99,7 @@ public class UsuarioGratuito  extends Usuario{
         return ultimoAnuncio;
     }
 
-    public int getLimiteReproduccionesHoy(){
+    public int getReproduccionesHoy(){
 
     }
 
