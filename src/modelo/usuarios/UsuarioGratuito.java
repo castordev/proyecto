@@ -44,14 +44,13 @@ public class UsuarioGratuito  extends Usuario{
             throw new ContenidoNoDisponibleException("Contenido no disponible");
         }
 
-        if(reproduccionesHoy > 30){
+        if(reproduccionesHoy > LIMITE_DIARIO){
             throw new LimiteDiarioAlcanzadoException("limite diario alcanzado");
         }
 
         if(debeVerAnuncio()){
             throw new AnuncioRequeridoExcepcion("anuncio");
         }
-
 
         contenido.reproducir();
         reproduccionesHoy++;

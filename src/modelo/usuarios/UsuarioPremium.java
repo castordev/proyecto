@@ -8,6 +8,7 @@ import excepciones.descarga.LimiteDescargasException;
 import excepciones.usuario.AnuncioRequeridoExcepcion;
 import excepciones.usuario.EmailInvalidoException;
 import excepciones.usuario.PasswordDebilException;
+import interfaces.Descargable;
 import modelo.contenido.Contenido;
 
 import java.util.ArrayList;
@@ -30,12 +31,16 @@ public class UsuarioPremium extends Usuario{
         this.descargasOffline = true;
         this.maxDescargas = MAX_DESCARGAS_DEFAULT;
         this.descargados = new ArrayList<>();
-
+        this.calidadAudio = "Alta";
     }
 
     public UsuarioPremium (String nombre, String email, String password, TipoSuscripcion suscripcion)throws EmailInvalidoException, PasswordDebilException {
-        super(nombre,email,password, TipoSuscripcion.PREMIUM);
+        super(nombre,email,password, suscripcion != null ? suscripcion : TipoSuscripcion.PREMIUM);
 
+        this.descargasOffline = true;
+        this.maxDescargas = MAX_DESCARGAS_DEFAULT;
+        this.descargados = new ArrayList<>();
+        this.calidadAudio = "Alta";
     }
 
     @Override
@@ -48,11 +53,29 @@ public class UsuarioPremium extends Usuario{
     }
 
     public void descargar (Contenido contenido) throws LimiteDescargasException, ContenidoYaDescargadoException{
+        if(contenido == null){
+            return;
+        }
+        if(contenido instanceof Descargable){
+            return;
+        }
+        if(!verificarEspacioDescarga()){
+            throw new LimiteDescargasException("Limite de descargas alcanzado");
+        }
+
+        //verificar que no haya descargas duplicadas
+        if(descargados.contains(contenido)) throw new ContenidoYaDescargadoException("contenido ya descargado");
+
+        ((Descargable) contenido).descargar();
+        descargados.add(contenido);
 
     }
 
     public boolean eliminarDescarga (Contenido contenido){
-
+        if(contenido == null){
+            return false;
+        }
+        if()
     }
 
     public boolean verificarEspacioDescarga(){
