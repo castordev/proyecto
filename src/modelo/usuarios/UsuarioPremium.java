@@ -25,7 +25,11 @@ public class UsuarioPremium extends Usuario{
 
 
     public UsuarioPremium (String nombre, String email, String password)throws EmailInvalidoException, PasswordDebilException {
-        super(nombre,email,password);
+        super(nombre,email,password,TipoSuscripcion.PREMIUM);
+
+        this.descargasOffline = true;
+        this.maxDescargas = MAX_DESCARGAS_DEFAULT;
+        this.descargados = new ArrayList<>();
 
     }
 
@@ -36,7 +40,11 @@ public class UsuarioPremium extends Usuario{
 
     @Override
     public void reproducir(Contenido contenido) throws ContenidoNoDisponibleException, LimiteEpisodiosException, AnuncioRequeridoExcepcion {
-
+        if(!contenido.isDisponible()){
+            throw new ContenidoNoDisponibleException("Contenido no disponible");
+        }
+        contenido.reproducir();
+        agregarAlHistorial(contenido);
     }
 
     public void descargar (Contenido contenido) throws LimiteDescargasException, ContenidoYaDescargadoException{

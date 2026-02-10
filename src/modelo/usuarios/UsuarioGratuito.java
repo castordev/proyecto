@@ -27,6 +27,14 @@ public class UsuarioGratuito  extends Usuario{
     public UsuarioGratuito (String nombre, String email, String password) throws EmailInvalidoException, PasswordDebilException{
         super(nombre,email,password, TipoSuscripcion.GRATUITO);
 
+       //porque añadir esto si no lo pide.
+        this.anunciosEscuchados = 0;
+        this.ultimoAnuncio = null;
+        this.reproduccionesHoy = 0;
+        this.limiteReproducciones = LIMITE_DIARIO;
+        this.cancionesSinAnuncio = 0;
+        this.fechaUltimaReproduccion = new Date();
+
     }
 
     // Aplica limite diario y logica de anuncios
@@ -100,7 +108,7 @@ public class UsuarioGratuito  extends Usuario{
     }
 
     public int getReproduccionesHoy(){
-
+        return reproduccionesHoy;
     }
 
     public void setReproduccionesHoy(int reproduccionesHoy){
