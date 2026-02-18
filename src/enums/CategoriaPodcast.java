@@ -34,6 +34,6 @@ public enum CategoriaPodcast {
 
     @Override
     public String toString() {
-        return super.toString();
+        return nombre;
     }
 }

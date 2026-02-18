@@ -14,13 +14,12 @@ public enum TipoSuscripcion {
     private boolean descargasOffline;
 
 
-    // constructor
-    TipoSuscripcion(double v, boolean b, int i, boolean b1) {
+    TipoSuscripcion(double precioMensual, boolean sinAnuncios, int limiteReproducciones, boolean descargasOffline) {
+        this.precioMensual = precioMensual;
+        this.sinAnuncios = sinAnuncios;
+        this.limiteReproducciones = limiteReproducciones;
+        this.descargasOffline = descargasOffline;
     }
-
-
-
-    //gets sets
 
     public double getPrecioMensual() {
         return precioMensual;
@@ -45,6 +44,6 @@ public enum TipoSuscripcion {
 
     @Override
     public String toString() {
-        return super.toString();
+        return name() + " ($" + precioMensual + "/mes)";
     }
 }

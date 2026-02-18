@@ -27,7 +27,7 @@ public enum CriterioOrden {
 
     @Override
     public String toString() {
-        return super.toString();
+        return nombre;
     }
 
 }

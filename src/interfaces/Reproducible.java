@@ -1,6 +1,6 @@
 package interfaces;
 
-public interface Repoducible {
+public interface Reproducible {
 
     void play();
     void pause();

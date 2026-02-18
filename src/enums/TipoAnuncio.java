@@ -26,6 +26,6 @@ public enum TipoAnuncio {
 
     @Override
     public String toString() {
-        return super.toString();
+        return name() + " (" + duracionSegundos + "s)";
     }
 }

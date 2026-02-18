@@ -4,7 +4,7 @@ package modelo.usuarios;
 import enums.TipoSuscripcion;
 import excepciones.artista.LimiteEpisodiosException;
 import excepciones.contenido.ContenidoNoDisponibleException;
-import excepciones.usuario.AnuncioRequeridoExcepcion;
+import excepciones.usuario.AnuncioRequeridoException;
 import excepciones.usuario.EmailInvalidoException;
 import excepciones.usuario.PasswordDebilException;
 import modelo.contenido.Contenido;
@@ -28,18 +28,26 @@ public abstract class Usuario {
     protected ArrayList<Contenido> contenidosLiked;
 
 
-    public Usuario(String nombre, String email, String password, TipoSuscripcion suscripcion) throws EmailInvalidoException, AnuncioRequeridoExcepcion {
-        this.nombre = nombre;
+    public Usuario(String nombre, String email, String password, TipoSuscripcion suscripcion) throws EmailInvalidoException, PasswordDebilException {
         this.email = email;
         this.password = password;
+        validarEmail();
+        validarPassword();
+        this.id = java.util.UUID.randomUUID().toString();
+        this.nombre = nombre;
         this.suscripcion = suscripcion;
+        this.misPlaylists = new ArrayList<>();
+        this.historial = new ArrayList<>();
+        this.fechaRegistro = new Date();
+        this.playlistsSeguidas = new ArrayList<>();
+        this.contenidosLiked = new ArrayList<>();
     }
 
 
     //reproduce contenido segun tipo de usuario
-    public abstract void reproducir (Contenido contenido) throws  ContenidoNoDisponibleException, LimiteEpisodiosException, AnuncioRequeridoExcepcion;
+    public abstract void reproducir (Contenido contenido) throws  ContenidoNoDisponibleException, LimiteEpisodiosException, AnuncioRequeridoException;
 
-    public Playlist crearPlaylists( String nombrePlaylist){
+    public Playlist crearPlaylist( String nombrePlaylist){
         Playlist playlist = new Playlist(nombrePlaylist, this);
         misPlaylists.add(playlist);
         return playlist;

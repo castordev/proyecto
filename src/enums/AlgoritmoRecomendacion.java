@@ -19,6 +19,6 @@ public enum AlgoritmoRecomendacion {
 
     @Override
     public String toString() {
-        return super.toString();
+        return name() + ": " + descripcion;
     }
 }
