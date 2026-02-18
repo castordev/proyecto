@@ -357,18 +357,98 @@ public class Plataforma {
 
     public String obtenerEstadisticasGenerales() {
         StringBuilder sb = new StringBuilder();
-        sb.append("=== Estadísticas de ").append(nombre).append(" ===\n");
-        sb.append("Total usuarios: ").append(getTotalUsuarios()).append("\n");
-        sb.append("  - Premium: ").append(getUsuariosPremium().size()).append("\n");
-        sb.append("  - Gratuitos: ").append(getUsuariosGratuitos().size()).append("\n");
-        sb.append("Total contenido: ").append(getTotalContenido()).append("\n");
-        sb.append("  - Canciones: ").append(getCanciones().size()).append("\n");
-        sb.append("  - Podcasts: ").append(getPodcasts().size()).append("\n");
-        sb.append("Total artistas: ").append(artistas.size()).append("\n");
-        sb.append("Total creadores: ").append(creadores.size()).append("\n");
-        sb.append("Total álbumes: ").append(albumes.size()).append("\n");
-        sb.append("Playlists públicas: ").append(playlistsPublicas.size()).append("\n");
-        sb.append("Anuncios reproducidos: ").append(totalAnunciosReproducidos).append("\n");
+        sb.append("\n========================\n");
+        sb.append("ESTADÍSTICAS DE ").append(nombre.toUpperCase()).append("\n");
+        sb.append("========================\n");
+
+        // Usuarios
+        int premiumCount = getUsuariosPremium().size();
+        int gratuitoCount = getUsuariosGratuitos().size();
+        double ingresos = 0;
+        for (Usuario u : usuarios.values()) {
+            ingresos += u.getSuscripcion().getPrecioMensual();
+        }
+
+        sb.append("Total Usuarios: ").append(usuarios.size())
+                .append(" (").append(premiumCount).append(" Premium, ")
+                .append(gratuitoCount).append(" Gratuitos)\n");
+
+        // Contenido
+        int canciones = getCanciones().size();
+        int podcasts = getPodcasts().size();
+        sb.append("Total Contenido: ").append(catalogo.size())
+                .append(" (").append(canciones).append(" canciones, ")
+                .append(podcasts).append(" podcasts)\n");
+
+        // Artista más popular
+        Artista artistaMasPopular = null;
+        int maxRepros = 0;
+        for (Artista a : artistas.values()) {
+            int repros = a.getTotalReproducciones();
+            if (repros > maxRepros) {
+                maxRepros = repros;
+                artistaMasPopular = a;
+            }
+        }
+        if (artistaMasPopular != null) {
+            sb.append("Artista más popular: ").append(artistaMasPopular.getNombreArtistico())
+                    .append(" (").append(maxRepros).append(" reproducciones)\n");
+        }
+
+        // Creador más popular
+        Creador creadorMasPopular = null;
+        int maxSubs = 0;
+        for (Creador c : creadores.values()) {
+            if (c.getSuscriptores() > maxSubs) {
+                maxSubs = c.getSuscriptores();
+                creadorMasPopular = c;
+            }
+        }
+        if (creadorMasPopular != null) {
+            sb.append("Creador más popular: ").append(creadorMasPopular.getNombreCanal())
+                    .append(" (").append(maxSubs).append(" suscriptores)\n");
+        }
+
+        // Género más popular
+        HashMap<GeneroMusical, Integer> generoCount = new HashMap<>();
+        for (Cancion c : getCanciones()) {
+            GeneroMusical g = c.getGenero();
+            generoCount.put(g, generoCount.getOrDefault(g, 0) + c.getReproducciones());
+        }
+        GeneroMusical generoTop = null;
+        int maxGenero = 0;
+        for (GeneroMusical g : generoCount.keySet()) {
+            if (generoCount.get(g) > maxGenero) {
+                maxGenero = generoCount.get(g);
+                generoTop = g;
+            }
+        }
+        if (generoTop != null) {
+            sb.append("Género más escuchado: ").append(generoTop.getNombre()).append("\n");
+        }
+
+        // Categoría más popular
+        HashMap<CategoriaPodcast, Integer> catCount = new HashMap<>();
+        for (Podcast p : getPodcasts()) {
+            CategoriaPodcast cat = p.getCategoria();
+            catCount.put(cat, catCount.getOrDefault(cat, 0) + p.getReproducciones());
+        }
+        CategoriaPodcast catTop = null;
+        int maxCat = 0;
+        for (CategoriaPodcast cat : catCount.keySet()) {
+            if (catCount.get(cat) > maxCat) {
+                maxCat = catCount.get(cat);
+                catTop = cat;
+            }
+        }
+        if (catTop != null) {
+            sb.append("Categoría podcast más popular: ").append(catTop.getNombre()).append("\n");
+        }
+
+        sb.append("Ingresos mensuales: $").append(String.format("%.2f", ingresos)).append("\n");
+        sb.append("Total anuncios reproducidos: ").append(totalAnunciosReproducidos).append("\n");
+        sb.append("========================\n");
+
         return sb.toString();
     }
 

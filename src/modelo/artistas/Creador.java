@@ -62,9 +62,9 @@ public class Creador {
         return new EstadisticasCreador(this);
     }
 
-    public void agregarRedSocial(String red, String usuario) {
+    public void agregarRedSocial(String usuario, String red) {
         if (red != null && usuario != null) {
-            redesSociales.put(red, usuario);
+            redesSociales.put(usuario.toLowerCase(), red.toLowerCase());
         }
     }
 

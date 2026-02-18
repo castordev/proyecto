@@ -24,7 +24,7 @@ public enum CategoriaPodcast {
         this.descripcion = descripcion;
     }
 
-    public String getNombreCategoriaPodcast(){
+    public String getNombre(){
         return nombre;
     }
 
@@ -36,4 +36,6 @@ public enum CategoriaPodcast {
     public String toString() {
         return nombre;
     }
+
+
 }
