@@ -42,7 +42,7 @@ public class UsuarioPremium extends Usuario {
     @Override
     public void reproducir(Contenido contenido) throws ContenidoNoDisponibleException, LimiteDiarioAlcanzadoException, AnuncioRequeridoException {
         if (!contenido.isDisponible()) {
-            throw new ContenidoNoDisponibleException("El contenido '" + contenido.getTitulo() + "' no está disponible");
+            throw new ContenidoNoDisponibleException("El contenido no está disponible");
         }
         // Premium reproduce sin anuncios ni límite diario
         contenido.reproducir();
@@ -73,7 +73,12 @@ public class UsuarioPremium extends Usuario {
     }
 
     public boolean eliminarDescarga(Contenido contenido) {
+
+        //si el contenido esta en el arraylist descargados lo eliminamos y devuelve true
         if (descargados.remove(contenido)) {
+
+            // si contenido implementa la interfaz descargable ademas de quitar el contenido
+            // de la lista del usuario actualizamos el estado del objeto a descargado = false
             if (contenido instanceof Descargable) {
                 ((Descargable) contenido).eliminarDescarga();
             }
@@ -91,6 +96,9 @@ public class UsuarioPremium extends Usuario {
     }
 
     public void cambiarCalidadAudio(String calidad) {
+
+        // validamos que la calidad no es null o calidad equals una de las permitidas
+        // antes de cambiar a la nueva calidad
         if (calidad != null && (calidad.equals("baja") || calidad.equals("media") ||
                 calidad.equals("alta") || calidad.equals("muy alta"))) {
             this.calidadAudio = calidad;
@@ -98,6 +106,7 @@ public class UsuarioPremium extends Usuario {
     }
 
     public void limpiarDescargas() {
+
         for (Contenido contenido : descargados) {
             if (contenido instanceof Descargable) {
                 ((Descargable) contenido).eliminarDescarga();
@@ -106,7 +115,6 @@ public class UsuarioPremium extends Usuario {
         descargados.clear();
     }
 
-    // Getters y Setters
 
     public boolean isDescargasOffline() {
         return descargasOffline;

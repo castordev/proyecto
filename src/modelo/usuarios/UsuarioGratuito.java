@@ -1,5 +1,6 @@
 package modelo.usuarios;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Random;
 
@@ -18,27 +19,28 @@ public class UsuarioGratuito extends Usuario {
     private static final int CANCIONES_ENTRE_ANUNCIOS = 3;
 
     private int anunciosEscuchados;
-    private Date ultimoAnuncio;
+    private LocalDate ultimoAnuncio;
     private int reproduccionesHoy;
     private int limiteReproducciones;
     private int cancionesSinAnuncio;
-    private Date fechaUltimaReproduccion;
+    private LocalDate fechaUltimaReproduccion;
 
-    public UsuarioGratuito(String nombre, String email, String password)
-            throws EmailInvalidoException, PasswordDebilException {
+    public UsuarioGratuito(String nombre, String email, String password) throws EmailInvalidoException, PasswordDebilException {
         super(nombre, email, password, TipoSuscripcion.GRATUITO);
         this.anunciosEscuchados = 0;
         this.ultimoAnuncio = null;
         this.reproduccionesHoy = 0;
         this.limiteReproducciones = LIMITE_DIARIO;
         this.cancionesSinAnuncio = 0;
-        this.fechaUltimaReproduccion = new Date();
+        this.fechaUltimaReproduccion = LocalDate.now();
     }
 
     @Override
     public void reproducir(Contenido contenido) throws ContenidoNoDisponibleException, LimiteDiarioAlcanzadoException, AnuncioRequeridoException {
+
+       //si el contenido no es disponible, tiramos excepcion
         if (!contenido.isDisponible()) {
-            throw new ContenidoNoDisponibleException("El contenido '" + contenido.getTitulo() + "' no está disponible");
+            throw new ContenidoNoDisponibleException("El contenido no está disponible");
         }
 
         // Verificar si es un nuevo día
@@ -46,7 +48,7 @@ public class UsuarioGratuito extends Usuario {
 
         // Verificar límite diario
         if (!puedeReproducir()) {
-            throw new LimiteDiarioAlcanzadoException("Has alcanzado el límite de " + limiteReproducciones + " reproducciones diarias");
+            throw new LimiteDiarioAlcanzadoException("Has alcanzado el límite de reproducciones diarias");
         }
 
         // Verificar si debe ver anuncio
@@ -58,26 +60,26 @@ public class UsuarioGratuito extends Usuario {
         contenido.reproducir();
         reproduccionesHoy++;
         cancionesSinAnuncio++;
-        fechaUltimaReproduccion = new Date();
+        fechaUltimaReproduccion = LocalDate.now();
         agregarAlHistorial(contenido);
     }
 
-    private void verificarNuevoDia() {
-        Date ahora = new Date();
-        if (fechaUltimaReproduccion != null) {
-            // Comparar solo la fecha (día)
-            if (!esMismoDia(fechaUltimaReproduccion, ahora)) {
-                reiniciarContadorDiario();
-            }
+
+    // creamos metodo para verificar que es un nuevo dia
+    private void verificarNuevoDia(){
+
+        LocalDate hoy = LocalDate.now();
+
+        //reiniciamos el contador diario
+        if(fechaUltimaReproduccion == null || !fechaUltimaReproduccion.equals(hoy)){
+            reproduccionesHoy = 0;
         }
+
+        fechaUltimaReproduccion = hoy;
     }
 
-    @SuppressWarnings("deprecation")
-    private boolean esMismoDia(Date fecha1, Date fecha2) {
-        return fecha1.getYear() == fecha2.getYear() &&
-                fecha1.getMonth() == fecha2.getMonth() &&
-                fecha1.getDate() == fecha2.getDate();
-    }
+
+
 
     public void verAnuncio() {
         String[] empresas = {"Spotify", "Nike", "Coca-Cola", "Apple", "Samsung"};
@@ -86,7 +88,7 @@ public class UsuarioGratuito extends Usuario {
         System.out.println("Anuncio de " + empresa + " [15s]");
         anunciosEscuchados++;
         cancionesSinAnuncio = 0;
-        ultimoAnuncio = new Date();
+        ultimoAnuncio = LocalDate.now();
     }
 
     public void verAnuncio(Anuncio anuncio) {
@@ -96,7 +98,7 @@ public class UsuarioGratuito extends Usuario {
             anuncio.reproducir();
             anunciosEscuchados++;
             cancionesSinAnuncio = 0;
-            ultimoAnuncio = new Date();
+            ultimoAnuncio = LocalDate.now();
         }
     }
 
@@ -121,13 +123,11 @@ public class UsuarioGratuito extends Usuario {
         return CANCIONES_ENTRE_ANUNCIOS - cancionesSinAnuncio;
     }
 
-    // Getters y Setters
-
     public int getAnunciosEscuchados() {
         return anunciosEscuchados;
     }
 
-    public Date getUltimoAnuncio() {
+    public LocalDate getUltimoAnuncio() {
         return ultimoAnuncio;
     }
 
