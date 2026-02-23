@@ -20,7 +20,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("╔══════════════════════════════════════════════════════════════╗");
         System.out.println("║           SOUNDWAVE - Escenarios de Validación               ║");
-        System.out.println("╚══════════════════════════════════════════════════════════════╝\n");
+        System.out.println("╚══════════════════════════════════════════════════════════════╝");
 
         // Reiniciar la instancia para tener un estado limpio
         Plataforma.reiniciarInstancia();

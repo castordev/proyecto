@@ -29,8 +29,7 @@ public class Cancion extends Contenido implements Reproducible, Descargable {
     private boolean descargado;
 
 
-    public Cancion(String titulo, int duracionSegundos, Artista artista, GeneroMusical genero)
-            throws DuracionInvalidaException {
+    public Cancion(String titulo, int duracionSegundos, Artista artista, GeneroMusical genero) throws DuracionInvalidaException {
         super(titulo, duracionSegundos);
         this.artista = artista;
         this.genero = genero;
@@ -44,8 +43,7 @@ public class Cancion extends Contenido implements Reproducible, Descargable {
     }
 
 
-    public Cancion(String titulo, int duracionSegundos, Artista artista, GeneroMusical genero,
-                   String letra, boolean explicit) throws DuracionInvalidaException {
+    public Cancion(String titulo, int duracionSegundos, Artista artista, GeneroMusical genero, String letra, boolean explicit) throws DuracionInvalidaException {
         super(titulo, duracionSegundos);
         this.artista = artista;
         this.genero = genero;

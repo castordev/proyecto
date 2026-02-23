@@ -59,19 +59,19 @@ public class Plataforma {
         this.anuncios = new ArrayList<>();
         this.recomendador = new RecomendadorIA();
         this.totalAnunciosReproducidos = 0;
-
-        // Inicializar anuncios por defecto
-        anuncios.add(new Anuncio("Spotify", TipoAnuncio.AUDIO, 1000.0));
-        anuncios.add(new Anuncio("Nike", TipoAnuncio.VIDEO, 2000.0));
-        anuncios.add(new Anuncio("Coca-Cola", TipoAnuncio.BANNER, 500.0));
     }
 
+
+    // la primera vez que llamamos a la instancia la instancia es null
+    //una vez creado el objeto no se puede crear otro objeto igual sin reiniciar instancia
+    // metodo singleton
     public static synchronized Plataforma getInstancia(String nombre) {
         if (instancia == null) {
             instancia = new Plataforma(nombre);
         }
         return instancia;
     }
+
 
     public static synchronized Plataforma getInstancia() {
         return getInstancia("SoundWave");
@@ -83,8 +83,7 @@ public class Plataforma {
 
     // Gestión de usuarios
 
-    public UsuarioPremium registrarUsuarioPremium(String nombre, String email, String password,
-                                                  TipoSuscripcion tipo) throws UsuarioYaExisteException, EmailInvalidoException, PasswordDebilException {
+    public UsuarioPremium registrarUsuarioPremium(String nombre, String email, String password, TipoSuscripcion tipo) throws UsuarioYaExisteException, EmailInvalidoException, PasswordDebilException {
         if (usuariosPorEmail.containsKey(email.toLowerCase())) {
             throw new UsuarioYaExisteException("Ya existe un usuario con el email: " + email);
         }
@@ -140,8 +139,7 @@ public class Plataforma {
 
     // Gestión de artistas
 
-    public Artista registrarArtista(String nombreArtistico, String nombreReal,
-                                    String paisOrigen, boolean verificado) {
+    public Artista registrarArtista(String nombreArtistico, String nombreReal, String paisOrigen, boolean verificado) {
         Artista artista = new Artista(nombreArtistico, nombreReal, paisOrigen, verificado, "");
         artistas.put(artista.getId(), artista);
         return artista;
@@ -184,8 +182,7 @@ public class Plataforma {
 
     // Gestión de álbumes
 
-    public Album crearAlbum(Artista artista, String titulo, Date fecha)
-            throws ArtistaNoVerificadoException, AlbumYaExisteException {
+    public Album crearAlbum(Artista artista, String titulo, Date fecha) throws ArtistaNoVerificadoException, AlbumYaExisteException {
         Album album = artista.crearAlbum(titulo, fecha);
         albumes.add(album);
         return album;
@@ -197,8 +194,7 @@ public class Plataforma {
 
     // Gestión de canciones
 
-    public Cancion crearCancion(String titulo, int duracion, Artista artista, GeneroMusical genero)
-            throws DuracionInvalidaException {
+    public Cancion crearCancion(String titulo, int duracion, Artista artista, GeneroMusical genero) throws DuracionInvalidaException {
         Cancion cancion = new Cancion(titulo, duracion, artista, genero);
         catalogo.add(cancion);
         if (artista != null) {
@@ -207,8 +203,7 @@ public class Plataforma {
         return cancion;
     }
 
-    public Cancion crearCancionEnAlbum(String titulo, int duracion, Artista artista,
-                                       GeneroMusical genero, Album album) throws DuracionInvalidaException, AlbumCompletoException {
+    public Cancion crearCancionEnAlbum(String titulo, int duracion, Artista artista, GeneroMusical genero, Album album) throws DuracionInvalidaException, AlbumCompletoException {
         Cancion cancion = album.crearCancion(titulo, duracion, genero);
         catalogo.add(cancion);
         return cancion;

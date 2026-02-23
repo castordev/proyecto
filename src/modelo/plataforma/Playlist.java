@@ -38,7 +38,7 @@ public class Playlist {
         this.esPublica = false;
         this.seguidores = 0;
         this.descripcion = "";
-        this.portadaURL = "https://soundwave.com/playlists/" + id + ".jpg";
+        this.portadaURL = "";
         this.fechaCreacion = new Date();
         this.maxContenidos = MAX_CONTENIDOS_DEFAULT;
     }
@@ -51,14 +51,17 @@ public class Playlist {
         this.esPublica = esPublica;
         this.seguidores = 0;
         this.descripcion = descripcion;
-        this.portadaURL = "https://soundwave.com/playlists/" + id + ".jpg";
+        this.portadaURL = "";
         this.fechaCreacion = new Date();
         this.maxContenidos = MAX_CONTENIDOS_DEFAULT;
     }
 
     public void agregarContenido(Contenido contenido) throws PlaylistLlenaException, ContenidoDuplicadoException {
+        if(contenido == null){
+            throw new IllegalArgumentException("contenido invalido");
+        }
         if (contenidos.size() >= maxContenidos) {
-            throw new PlaylistLlenaException("La playlist '" + nombre + "' está llena");
+            throw new PlaylistLlenaException("La playlist está llena");
         }
         if (contenidos.contains(contenido)) {
             throw new ContenidoDuplicadoException("El contenido ya existe en la playlist");
@@ -67,16 +70,26 @@ public class Playlist {
     }
 
     public boolean eliminarContenido(String idContenido) {
+        if(idContenido == null) return false;
+
         for (int i = 0; i < contenidos.size(); i++) {
-            if (contenidos.get(i).getId().equals(idContenido)) {
+            Contenido contenido = contenidos.get(i);
+
+            //si en esta vuelta al bucle idContenido es igual a i (contenido.getId) lo eliminamos de la playlist
+            if(idContenido.equals(contenido.getId())){
                 contenidos.remove(i);
                 return true;
             }
+
         }
         return false;
     }
 
     public boolean eliminarContenido(Contenido contenido) {
+        if(contenido == null){
+            throw new IllegalArgumentException("Contenido no valido");
+            //no hace falta poner return false porque lo que venga despues del throw no se ejecuta
+        }
         return contenidos.remove(contenido);
     }
 
@@ -182,8 +195,6 @@ public class Playlist {
         }
         return contenidos.get(posicion);
     }
-
-    // Getters y Setters
 
     public String getId() {
         return id;

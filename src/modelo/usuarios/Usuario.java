@@ -31,8 +31,6 @@ public abstract class Usuario {
     public Usuario(String nombre, String email, String password, TipoSuscripcion suscripcion) throws EmailInvalidoException, PasswordDebilException {
         this.email = email;
         this.password = password;
-        validarEmail();
-        validarPassword();
         this.id = java.util.UUID.randomUUID().toString();
         this.nombre = nombre;
         this.suscripcion = suscripcion;
@@ -41,6 +39,10 @@ public abstract class Usuario {
         this.fechaRegistro = new Date();
         this.playlistsSeguidas = new ArrayList<>();
         this.contenidosLiked = new ArrayList<>();
+
+
+        validarEmail();
+        validarPassword();
     }
 
 
@@ -106,6 +108,12 @@ public abstract class Usuario {
         return true;
     }
 
+    // public void setPassword(String password) throws PasswordDebilException {
+    //    validarPassword(password);
+    //    this.password = password;
+    //}
+
+
     public void agregarAlHistorial( Contenido contenido){
         if(contenido != null){
             historial.remove(contenido); //si ya existe lo eliminamos para ponerlo al principio
@@ -123,7 +131,7 @@ public abstract class Usuario {
     }
 
     public boolean esPremium(){
-        return suscripcion != TipoSuscripcion.GRATUITO;
+        return suscripcion == TipoSuscripcion.PREMIUM;
     }
 
     public String getId(){
@@ -143,10 +151,10 @@ public abstract class Usuario {
     }
 
     public void setEmail(String email) throws EmailInvalidoException {
-        this.email = email;
-
         //valida y lanza excepcion si es invalido
         validarEmail();
+
+        this.email = email;
     }
 
     public String getPassword() {
@@ -154,8 +162,8 @@ public abstract class Usuario {
     }
 
     public void setPassword(String password) throws PasswordDebilException {
-        this.password = password;
         validarPassword();
+        this.password = password;
     }
 
     public TipoSuscripcion getSuscripcion() {
